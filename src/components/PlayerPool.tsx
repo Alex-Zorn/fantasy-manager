@@ -79,6 +79,8 @@ export function PlayerPool() {
               <th className="px-3 py-2 font-medium">Team</th>
               <th className="px-3 py-2 font-medium">Bye</th>
               <th className="px-3 py-2 font-medium">Tier</th>
+              <th className="px-3 py-2 text-right font-medium">Proj</th>
+              <th className="px-3 py-2 text-right font-medium">VBD</th>
               <th className="px-3 py-2 font-medium"></th>
             </tr>
           </thead>
@@ -102,6 +104,12 @@ export function PlayerPool() {
                   {p.bye ?? "-"}
                 </td>
                 <td className="px-3 py-1.5 text-neutral-500">{p.tier}</td>
+                <td className="px-3 py-1.5 text-right text-neutral-500">
+                  {p.projectedPoints?.toFixed(1) ?? "-"}
+                </td>
+                <td className="px-3 py-1.5 text-right font-medium text-emerald-700 dark:text-emerald-400">
+                  {p.vbd?.toFixed(1) ?? "-"}
+                </td>
                 <td className="px-3 py-1.5 text-right">
                   <button
                     type="button"
@@ -121,7 +129,7 @@ export function PlayerPool() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-3 py-8 text-center text-neutral-500">
+                <td colSpan={9} className="px-3 py-8 text-center text-neutral-500">
                   No players match.
                 </td>
               </tr>

@@ -150,8 +150,14 @@ export function SetupPanel() {
           Currently loaded: <strong>{playerCount}</strong> players.{" "}
           {state.players === SEED_PLAYERS ? (
             <span>
-              Built-in starter cheat sheet — a reasonable preseason ranking,
-              not live 2026 ADP. Import your own for accuracy.
+              Built-in cheat sheet, ranked by Value-Based Drafting (projected
+              points above each position&apos;s replacement level) from
+              FantasyPros projections. Re-run{" "}
+              <code className="rounded bg-neutral-100 px-1 py-0.5 dark:bg-neutral-800">
+                npm run gen:players
+              </code>{" "}
+              after downloading updated projections, or import your own CSV
+              below.
             </span>
           ) : null}
         </p>

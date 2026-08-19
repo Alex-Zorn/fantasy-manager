@@ -21,12 +21,32 @@ that hosts a Next.js app, e.g. [Vercel](https://vercel.com/new).
 
 ## Player data
 
-The app ships with a built-in ~180-player starter cheat sheet (rank, team,
-position, tier, and a placeholder bye week) so it works out of the box. For
-accurate, current rankings/ADP/bye weeks, use the "Upload CSV" / paste-CSV
-option on the setup screen — it accepts an export from FantasyPros or any
-sheet with `Rank, Player, Team, Position, Bye` columns (header names are
-matched case-insensitively; extra columns are ignored).
+The built-in cheat sheet (`src/data/players.ts`) is generated from
+FantasyPros season projection CSVs in
+`src/data/fantasypros_projections/` and ranked by **static Value-Based
+Drafting**: each player's projected points minus their position's
+replacement-level baseline (the "last starter" the league would still be
+drafting — starters implied by team count and roster slots, with FLEX
+allocated across RB/WR/TE proportional to their starter counts). This is
+why the top of the sheet is RB/WR-heavy rather than just "most points" —
+a replacement-level RB is worse than a replacement-level QB, so top RBs
+carry more marginal value. See `scripts/generate-players.mjs` for the
+exact algorithm.
+
+To refresh it: download new projection CSVs from FantasyPros into
+`src/data/fantasypros_projections/` (same six files — QB/RB/WR/TE/K/DST),
+then run:
+
+```bash
+npm run gen:players
+```
+
+Bye weeks aren't in the projections export, so they're placeholder values
+cycled per team — replace them via CSV import (below) if you need real
+ones. You can also skip the generated sheet entirely and use the "Upload
+CSV" / paste-CSV option on the setup screen, which accepts any sheet with
+`Rank, Player, Team, Position, Bye` columns (header names matched
+case-insensitively; extra columns ignored).
 
 ## How a draft works
 

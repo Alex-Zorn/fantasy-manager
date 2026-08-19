@@ -8,6 +8,10 @@ export interface Player {
   position: Position;
   bye: number | null;
   tier: number;
+  /** Season projected fantasy points (e.g. from FantasyPros projections). */
+  projectedPoints?: number;
+  /** Value-based-drafting score: projectedPoints minus the replacement-level baseline for this position. */
+  vbd?: number;
 }
 
 export interface RosterSlots {
